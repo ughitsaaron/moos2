@@ -1,7 +1,7 @@
 defmodule Moos2.Scrape do
   @type playlist :: {title :: String.t(), href :: String.t()}
   def get_playlist(path) do
-    response = Req.get!(path)
+    response = HTTPoison.get!(path)
     {:ok, document} = Floki.parse_document(response.body)
 
     Floki.find(document, "#songs table tr")
