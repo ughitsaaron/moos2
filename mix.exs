@@ -19,7 +19,7 @@ defmodule Moos2.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :plug_cowboy, :spotify_ex, :floki]
+      extra_applications: [:plug_cowboy, :spotify_ex, :floki]
     ]
   end
 
@@ -27,9 +27,9 @@ defmodule Moos2.MixProject do
   defp deps do
     [
       {:floki, "~> 0.34.0"},
+      {:httpoison, "~> 1.0.0"},
       {:jason, "~> 1.3"},
       {:plug_cowboy, "~> 2.6.1"},
-      {:req, "~> 0.3.10"},
       {:spotify_ex, "~> 2.2.1"}
     ]
   end
