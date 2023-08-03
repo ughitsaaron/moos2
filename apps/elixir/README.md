@@ -1,21 +1,14 @@
-# Moos2
+# Moos2 Elixir
 
-**TODO: Add description**
+## Building & Usage
 
-## Installation
+You will need to [register a developer application](https://developer.spotify.com/documentation/web-api) with Spotify in order to obtain an API access token.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `moos2` to your list of dependencies in `mix.exs`:
+1. Copy `config/spotify.secret.sample.exs` and rename it to `config/spotify.sample.exs`
+2. Update `config/spotify.sample.exs` with your `client_id`, `secret_key`, and `user_id` (i.e., your account user name).
+3. Run `mix deps.get` and `mix build` to [generate the application with `escript`](https://hexdocs.pm/mix/main/Mix.Tasks.Escript.Build.html).
+4. Now you can use the generated executable, e.g.,
 
-```elixir
-def deps do
-  [
-    {:moos2, "~> 0.1.0"}
-  ]
-end
+```sh
+$ ./moos2 [URL] [playlist name]
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/moos2>.
-
