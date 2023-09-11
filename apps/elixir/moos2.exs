@@ -1,24 +1,19 @@
-Mix.install([:poison, :floki, :httpoison])
-
-defmodule Credentials do
-  use Agent
-
-  def start_link do
-    Agent.start_link(fn -> %{} end, name: __MODULE__)
+IO.stream()
+|> Enum.reduce_while("", fn str, _acc ->
+  if String.contains?(str, "access_token") do
+    {:halt, str}
+  else
+    {:cont, str}
   end
+end)
+|> Poison.decode!()
+|> then(&Application.put_env(:moos2, :credentials, &1))
 
-  def set(value) do
-    Agent.update(__MODULE__, fn _ -> value end)
-  end
-
-  def set_username(username) do
-    Agent.update(__MODULE__, fn state -> Map.merge(state, %{"username" => username}) end)
-  end
-
-  def get do
-    Agent.get(__MODULE__, & &1)
-  end
-end
+Application.fetch_env!(:moos2, :credentials)
+|> tap(fn
+  %{"access_token" => _} -> IO.puts("Authentication: OK")
+  _ -> IO.puts("Authentication: Error")
+end)
 
 defmodule Spotify do
   use HTTPoison.Base
@@ -31,28 +26,27 @@ defmodule Spotify do
   def process_response_body(body), do: body |> Poison.decode!()
 
   def process_request_headers(_headers \\ []) do
-    credentials = Credentials.get()
-    ["Authorization": "Bearer " <> credentials["access_token"]]
+    credentials = Application.fetch_env!(:moos2, :credentials)
+    [Authorization: "Bearer " <> credentials["access_token"]]
   end
 
   defp search_for_track({artist, track} = _song_info) do
     q = format_query(artist: artist, track: track)
-    params = %{ q: q, type: "track", limit: 1 } |> URI.encode_query()
+    params = %{q: q, type: "track", limit: 1} |> URI.encode_query()
 
     Spotify.get!("/search?#{params}").body
-      |> get_in(["tracks", "items"])
-      |> List.first()
-      |> get_track_uri()
+    |> get_in(["tracks", "items"])
+    |> List.first()
+    |> get_track_uri()
   end
 
   def search_for_tracks(playlist) do
     Enum.map(playlist, fn track -> search_for_track(track) end)
-      |> Enum.reject(&is_nil/1)
+    |> Enum.reject(&is_nil/1)
   end
 
-  def create_playlist(name, uris) do
+  def create_playlist(name, uris, username) do
     body = %{"name" => name}
-    username = Credentials.get() |> Map.get("username")
     response = Spotify.post!("/users/#{username}/playlists", body).body
     Spotify.post("/playlists/#{response["id"]}/tracks", %{uris: uris})
   end
@@ -67,37 +61,33 @@ defmodule Spotify do
   end
 end
 
-Credentials.start_link()
 HTTPoison.start()
 Spotify.start()
 
-:ok = IO.read(:stdio, :all)
-  |> String.split("\n")
-  |> Enum.find(&(String.contains?(&1, "access_token")))
-  |> Poison.decode!()
-  |> Credentials.set
-
 defmodule Formatter do
   def print(:green, text) do
-    IO.ANSI.green() <> IO.ANSI.bright() <> text <> IO.ANSI.reset() |> IO.puts
+    (IO.ANSI.green() <> IO.ANSI.bright() <> text <> IO.ANSI.reset()) |> IO.puts()
   end
 
   def print(:red, text) do
-    IO.ANSI.red() <> IO.ANSI.bright() <> text <> IO.ANSI.reset() |> IO.puts
+    (IO.ANSI.red() <> IO.ANSI.bright() <> text <> IO.ANSI.reset()) |> IO.puts()
   end
 
   def print_bold(:white, text) do
-    IO.ANSI.white() <> IO.ANSI.bright() <> IO.ANSI.bright() <> text <> IO.ANSI.reset() |> IO.puts
+    (IO.ANSI.white() <> IO.ANSI.bright() <> IO.ANSI.bright() <> text <> IO.ANSI.reset())
+    |> IO.puts()
   end
 end
 
-case Spotify.get("/me") do
-  {:ok, %{status_code: 200, body: body}} ->
-    :ok = Credentials.set_username(body["id"])
-    Formatter.print(:green, "Okay!\n")
+username =
+  case Spotify.get("/me") do
+    {:ok, %{status_code: 200, body: body}} ->
+      Formatter.print(:green, "Okay!\n")
+      body["id"]
 
-  _ -> IO.inspect("Uh oh")
-end
+    _ ->
+      IO.inspect("Uh oh")
+  end
 
 defmodule Scrape do
   def get_playlist(path) do
@@ -127,6 +117,6 @@ end)
 
 uris = Spotify.search_for_tracks(tracks)
 
-{:ok, _} = Spotify.create_playlist(playlist_name, uris)
+{:ok, _} = Spotify.create_playlist(playlist_name, uris, username)
 
 Formatter.print(:green, "\nSuccess!\n")
