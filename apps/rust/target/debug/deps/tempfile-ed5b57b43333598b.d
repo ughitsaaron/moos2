@@ -1,0 +1,12 @@
+/Users/ughitsaaron/i_like_2_progrram/moos2/apps/rust/target/debug/deps/tempfile-ed5b57b43333598b.rmeta: /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/lib.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/dir.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/error.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/mod.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/imp/mod.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/spooled.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/util.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/imp/unix.rs
+
+/Users/ughitsaaron/i_like_2_progrram/moos2/apps/rust/target/debug/deps/tempfile-ed5b57b43333598b.d: /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/lib.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/dir.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/error.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/mod.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/imp/mod.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/spooled.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/util.rs /Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/imp/unix.rs
+
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/lib.rs:
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/dir.rs:
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/error.rs:
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/mod.rs:
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/imp/mod.rs:
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/spooled.rs:
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/util.rs:
+/Users/ughitsaaron/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.8.0/src/file/imp/unix.rs:

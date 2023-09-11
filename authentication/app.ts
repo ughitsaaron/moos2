@@ -57,8 +57,6 @@ app.get('/auth', (req, res) => {
       redirect_uri: CALLBACK_URL,
     });
 
-  console.log({ url });
-
   res.redirect(url);
 });
 
