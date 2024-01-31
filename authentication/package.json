@@ -18,6 +18,6 @@
     "prettier": "^3.0.0"
   },
   "scripts": {
-    "start": "yarn ts-node --esm ./app.ts"
+    "start": "source .env && yarn ts-node --esm ./app.ts"
   }
 }

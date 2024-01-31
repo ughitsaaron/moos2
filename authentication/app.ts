@@ -11,6 +11,8 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const BASE_URL = `http://localhost:${PORT}`;
 const CALLBACK_URL = `${BASE_URL}/auth/callback`;
 
+console.log({ CLIENT_ID, SECRET_KEY }) 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
